@@ -12,6 +12,7 @@ import { EstadisticaComponent } from "./ingreso-egreso/estadistica/estadistica.c
 import { DetalleComponent } from "./ingreso-egreso/detalle/detalle.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { RouterOutlet } from "@angular/router";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RouterOutlet } from "@angular/router";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterOutlet
+    RouterOutlet,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent ]
