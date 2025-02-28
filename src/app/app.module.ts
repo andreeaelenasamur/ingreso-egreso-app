@@ -13,6 +13,8 @@ import { DetalleComponent } from "./ingreso-egreso/detalle/detalle.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { RouterOutlet } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
+import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
