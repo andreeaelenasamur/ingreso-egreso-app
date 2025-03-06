@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
@@ -13,8 +14,10 @@ import { DetalleComponent } from "./ingreso-egreso/detalle/detalle.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { RouterOutlet } from "@angular/router";
 import { ReactiveFormsModule } from "@angular/forms";
-import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
-import { environment } from "../environments/environment";
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { AuthService } from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -33,9 +36,14 @@ import { environment } from "../environments/environment";
     BrowserModule,
     AppRoutingModule,
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
+  ],
   bootstrap: [AppComponent ]
 })
 export class AppModule {}
