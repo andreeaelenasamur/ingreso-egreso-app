@@ -18,6 +18,9 @@ import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AuthService } from './services/auth.service';
+import { StoreModule } from '@ngrx/store'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { appReducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,11 @@ import { AuthService } from './services/auth.service';
     AppRoutingModule,
     RouterOutlet,
     ReactiveFormsModule,
+    StoreModule.forRoot( appReducers ),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   providers: [
     AuthService,
