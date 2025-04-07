@@ -23,7 +23,7 @@ export class AuthService {
 
   initAuthListener() {
     authState(this.auth).subscribe( async fUser => {
-      console.log(fUser)
+      // console.log(fUser)
       if( fUser ) {
         const userRef = collection(this.firestore, 'user');
         const q = query(userRef, where("uid", "==", fUser.uid));
