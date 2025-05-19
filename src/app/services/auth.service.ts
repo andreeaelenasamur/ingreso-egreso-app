@@ -14,6 +14,7 @@ import { getDocs, query, where } from 'firebase/firestore';
 export class AuthService {
 
   userUnsubscribe!: Unsubscribe;
+  userId: any;
 
   constructor(
     private auth: Auth,
@@ -23,14 +24,15 @@ export class AuthService {
 
   initAuthListener() {
     authState(this.auth).subscribe( async fUser => {
-      // console.log(fUser)
       if( fUser ) {
         const userRef = collection(this.firestore, 'user');
         const q = query(userRef, where("uid", "==", fUser.uid));
         const querySnapshot = (await getDocs(q));
         querySnapshot.forEach(( doc: any ) => {
           this.store.dispatch(actions.setUser({ user: doc.data() }));
+          this.userId = doc.id;
         });
+
       } else {
         this.userUnsubscribe ? this.userUnsubscribe() : null;
         this.store.dispatch(actions.unSetUser());
